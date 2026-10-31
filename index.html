@@ -1,223 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Switch – Ultimate Universal Converter | Convert Length, Weight, Time</title>
-    <meta name="description" content="Switch – Ultimate Universal Converter. Convert units of length, weight, time, volume, and more quickly and easily.">
-    <link href="https://googleapis.com" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg: #0d0d17;
-            --card: #161624;
-            --text: #e0e0ff;
-            --accent: #7c3aed;
-            --accent-dark: #5b21b6;
-            --input-bg: #1e1e2f;
-            --border: #2d2d4a;
-            --error: #ff6b6b;
-            --label-color: #9ca3af;
-        }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Switch – Ultimate Universal Converter | Convert Length, Weight, Time</title>
+        <meta name="description" content="Switch – Ultimate Universal Converter. Convert units of length, weight, time, volume, and more quickly and easily.">
+        <link href="https://googleapis.com" rel="stylesheet">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        <style>
+            :root {
+                --bg: #0d0d17;
+                --card: #161624;
+                --text: #e0e0ff;
+                --accent: #7c3aed;
+                --accent-dark: #5b21b6;
+                --input-bg: #1e1e2f;
+                --border: #2d2d4a;
+                --error: #ff6b6b;
+                --label-color: #9ca3af;
+            }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, #a78bfa, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
-
-        .containerbox {
-            width: 100%;
-            max-width: 580px;
-            padding: 32px 24px;
-            background: var(--card);
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.45);
-        }
-
-        .row {
-            margin-bottom: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .row-2 {
-            display: flex;
-            flex-direction: row;
-            gap: 20px;
-        }
-
-        .row-2 .field-wrapper {
-            flex: 1;
-        }
-
-        @media (max-width: 500px) {
-            .row-2 {
+            body {
+                font-family: 'Inter', sans-serif;
+                background: var(--bg);
+                color: var(--text);
+                min-height: 100vh;
+                display: flex;
                 flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+
+            header {
+                text-align: center;
+                padding: 20px 0 20px;
+                margin-bottom: 10px;
+            }
+
+            h1 {
+                font-size: 3rem;
+                font-weight: 700;
+                background: linear-gradient(90deg, #a78bfa, #7c3aed);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin-bottom: 10px;
+            }
+
+            .containerbox {
+                width: 100%;
+                max-width: 580px;
+                padding: 32px 24px;
+                background: var(--card);
+                border-radius: 16px;
+                border: 1px solid var(--border);
+                box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+                font-family: system-ui, -apple-system, sans-serif;
+                color: #e0e0ff;
+            }
+
+            .row {
+                margin-bottom: 24px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .row-1, .row-3, .row-4, .row-5 {
+                /* single item rows */
+            }
+
+            .row-2 {
+                display: flex;
+                flex-direction: row;
                 gap: 20px;
             }
-        }
 
-        label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--label-color);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+            .field-wrapper {
+                position: relative;
+                flex: 1;
+            }
 
-        select, input[type="number"] {
-            width: 100%;
-            padding: 14px 16px;
-            background: var(--input-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text);
-            font-size: 1rem;
-            font-family: inherit;
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
+            @media (max-width: 500px) {
+                .row-2 {
+                    flex-direction: column;
+                    gap: 20px;
+                }
+            }
 
-        select:focus, input[type="number"]:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25);
-        }
+            .field-wrapper label {
+                position: absolute;
+                top: -10px;
+                left: 14px;
+                background: #141422;
+                padding: 0 8px;
+                font-size: 0.82rem;
+                color: #a0a0ff;
+                pointer-events: none;
+            }
 
-        .btn-convert {
-            width: 100%;
-            padding: 16px;
-            background: var(--accent);
-            border: none;
-            border-radius: 8px;
-            color: #ffffff;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-top: 8px;
-        }
+            select, input[type="number"] {
+                width: 100%;
+                padding: 14px 16px;
+                background: var(--input-bg);
+                border: 2px solid var(--border);
+                border-radius: 8px;
+                color: white;
+                font-size: 1rem;
+                font-family: inherit;
+                outline: none;
+                appearance: none;
+                transition: border-color 0.2s, box-shadow 0.2s;
+                -webkit-appearance: none;
+            }
 
-        .btn-convert:hover {
-            background: var(--accent-dark);
-        }
+            select:focus, input[type="number"]:focus {
+                outline: none;
+                border-color: #9b7aff;
+                box-shadow: 0 0 0 3px rgba(155,122,255,0.18);
+            }
 
-        .result-box {
-            margin-top: 24px;
-            padding: 16px;
-            background: rgba(124, 58, 237, 0.1);
-            border: 1px dashed var(--accent);
-            border-radius: 8px;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: 500;
-        }
-    </style>
-</head>
-<body>
+            .convertbtn {
+                width: 60%;
+                height: 60px;
+                align-self: center;
+                padding: 0 18px;
+                background: var(--accent);
+                border: none;
+                border-radius: 12px;
+                color: #ffffff;
+                font-size: 1rem;
+                font-weight: 600;
+                font-family: inherit;
+                cursor: pointer;
+                transition: background 0.2s;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
 
-    <header>
-        <h1>Switch</h1>
-    </header>
+            .convertbtn:hover {
+                background: var(--accent-dark);
+                transform: translateY(-2px);
+                box-shadow: 0 12px 32px rgba(124,58,237,0.35);
+            }
 
-    <div class="containerbox">
-        <!-- Category Row -->
-        <div class="row">
-            <label for="categorySelect">Category</label>
-            <select id="categorySelect">
-                <option value="" disabled selected>Select category</option>
-                <option value="prefixes">Prefixes</option>
-                <option value="length">Length</option>
-                <option value="astronomical">Astronomical Length</option>
-                <option value="angles">Angles</option>
-                <option value="acceleration">Acceleration</option>
-                <option value="surface">Surface / Area</option>
-                <option value="volume">Volume</option>
-                <option value="weight">Weight / Mass</option>
-                <option value="force">Force</option>
-                <option value="work">Work</option>
-                <option value="power">Power</option>
-                <option value="time">Time</option>
-                <option value="speed">Speed</option>
-                <option value="temperature">Temperature</option>
-                <option value="pressure">Pressure</option>
-                <option value="digital">Digital data</option>
-                <option value="electric">Electric data</option>
-                <option value="currency">Values / Currency</option>
-                <option value="timezone">Time Zones</option>
-            </select>
-        </div>
+            #convertbtn:active {
+                transform: translateY(0);
+            }
 
-        <!-- From & To Row -->
-        <div class="row row-2">
-            <div class="field-wrapper">
-                <label for="fromUnit">From</label>
-                <select id="fromUnit">
-                    <option value="" disabled selected>Select unit</option>
-                </select>
+            .result-box {
+                min-height: 80px;
+                padding: 24px;
+                font-size: 1.6rem;
+                font-weight: 600;
+                text-align: center;
+                background: rgba(139,92,246,0.08);
+                border: 1px solid rgba(139,92,246,0.25);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #e0e0ff;
+            }
+
+            .result-box.error {
+                color: #ff6b6b;
+                background: rgba(255,107,107,0.08);
+                border-color: rgba(255,107,107,0.3);
+            }
+
+            @media (max-width: 750px) {
+                .convertbtn {
+                    width: 80%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+
+        <header>
+            <h1>Switch</h1>
+        </header>
+
+        <div class="containerbox">
+
+            <!-- Row 1: Category selection -->
+            <div class="row row-1">
+                <div class="field-wrapper">
+                    <label for="category">Category</label>
+                    <select id="category">
+                        <option value="">Select category</option>
+                        <option value="prefixes">Prefixes</option>
+                        <option value="length">Length</option>
+                        <option value="astronomicalLength">Astronomical Length</option>
+                        <option value="angle">Angles</option>
+                        <option value="acceleration">Acceleration</option>
+                        <option value="area">Surface / Area</option>
+                        <option value="volume">Volume</option>
+                        <option value="mass">Weight / Mass</option>
+                        <option value="force">Force</option>
+                        <option value="work">Work</option>
+                        <option value="power">Power</option>
+                        <option value="time">Time</option>
+                        <option value="speed">Speed</option>
+                        <option value="temperature">Temperature</option>
+                        <option value="pressure">Pressure</option>
+                        <option value="digital">Digital data</option>
+                        <option value="electric">Electric data</option>
+                        <option value="currency">Values / Currency</option>
+                        <option value="timezones">Time Zones</option>
+                        <!-- <option value="timezone">Timezones</option> → usually needs special handling -->
+                    </select>
+                </div>
             </div>
-            <div class="field-wrapper">
-                <label for="toUnit">To</label>
-                <select id="toUnit">
-                    <option value="" disabled selected>Select unit</option>
-                </select>
+
+            <!-- Row 2: From + To units side by side -->
+            <div class="row row-2">
+                <div class="field-wrapper">
+                    <label for="fromunit">From</label>
+                    <select id="fromunit">
+                        <option value="">Select unit</option>
+                    </select>
+                </div>
+
+                <div class="field-wrapper">
+                    <label for="tounit">To</label>
+                    <select id="tounit">
+                        <option value="">Select unit</option>
+                    </select>
+                </div>
             </div>
+
+            <!-- Row 3: Input value -->
+            <div class="row row-3">
+                <div class="field-wrapper">
+                    <label for="valueInput">Value</label>
+                    <input type="number" id="valueInput" placeholder="Enter value" step="any" min="0" />
+                </div>
+            </div>
+
+            <!-- Row 4: Convert button -->
+            <div class="row row-4">
+                <button id="convertbtn" class="convertbtn">CONVERT</button>
+            </div>
+
+            <!-- Row 5: Result area -->
+            <div class="row row-5">
+                <div id="result" class="result-box">Result will appear here</div>
+            </div>
+
         </div>
 
-        <!-- Value Input Row -->
-        <div class="row">
-            <label for="inputValue">Value</label>
-            <input type="number" id="inputValue" placeholder="Enter value to convert..." />
-        </div>
-
-        <button class="btn-convert" id="convertBtn">Convert</button>
-
-        <div class="result-box" id="resultDisplay">
-            Result will appear here
-        </div>
-    </div>
-
-    <script>
-        // Here you can paste your JavaScript conversion logic from NetBeans.
-        // It will perfectly handle the values from 'categorySelect', 'fromUnit', 'toUnit', and 'inputValue'.
-        
-        document.getElementById('categorySelect').addEventListener('change', function() {
-            // Your logic to populate the 'From' and 'To' dropdown options based on the chosen category
-        });
-
-        document.getElementById('convertBtn').addEventListener('click', function() {
-            // Your math engine execution logic that alters 'resultDisplay' text
-        });
-    </script>
-</body>
+        <script src="logics.js"></script>
+    </body>
 </html>
